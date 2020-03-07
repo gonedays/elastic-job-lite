@@ -19,6 +19,10 @@ Elastic-Job-Cloud is a Mesos framework which use Mesos + Docker(todo) to manage 
 
 Elastic-Job-Lite and Elastic-Job-Cloud provide unified API. Developers only need code one time, then decide to deploy Lite or Cloud as you want.
 
+ 基于GitHub上的知名开源分布式任务调度项目elastic-job-lite,在2.1.5的tag上做了如下修改: 
+ 当服务器有多个IP时，定时任务注册到注册中心的ip不符合实际需求，因此增加了应用环境变量elastic.job.instance.prefer.ip，
+ 用于设置IP前缀. 并因此生成git的分支2.1.5.1
+
 # Features
 
 ## 1. Elastic-Job-Lite
