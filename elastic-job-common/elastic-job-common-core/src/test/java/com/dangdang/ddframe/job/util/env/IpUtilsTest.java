@@ -17,19 +17,43 @@
 
 package com.dangdang.ddframe.job.util.env;
 
+import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 public final class IpUtilsTest {
-    
+
+    @Before
+    public void clearCache() {
+        IpUtils.evictCache();
+    }
+
     @Test
     public void assertGetIp() {
-        assertNotNull(IpUtils.getIp());
+        String ip = IpUtils.getIp();
+        System.out.println("Got ip:" + ip);
+        assertNotNull(ip);
     }
-    
+
     @Test
     public void assertGetHostName() {
         assertNotNull(IpUtils.getHostName());
+    }
+
+    @Test
+    public void assertGetIpWithPrefix() {
+        System.setProperty(IpUtils.ENV_PARAM_IP_PREFIX, "192.168");
+        String ip = IpUtils.getIp();
+        System.out.println("assertGetIpWithPrefix, got ip:" + ip);
+        assertTrue(ip.startsWith("192.168"));
+    }
+
+    @Test
+    public void assertGetIpWithPrefix_2() {
+        System.setProperty(IpUtils.ENV_PARAM_IP_PREFIX, "10.255");
+        String ip = IpUtils.getIp();
+        System.out.println("assertGetIpWithPrefix, got ip:" + ip);
+        assertTrue(ip.startsWith("10.255"));
     }
 }
